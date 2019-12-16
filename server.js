@@ -10,6 +10,8 @@ const {
 } = require('graphql');
 const app = express();
 
+// Mocked Data --------------------------------------------------------------------
+
 const authors = [
 	{ id: 1, name: 'J. K. Rowling' },
 	{ id: 2, name: 'J. R. R. Tolkien' },
@@ -26,6 +28,8 @@ const books = [
 	{ id: 7, name: 'The Way of Shadows', authorId: 3 },
 	{ id: 8, name: 'Beyond the Shadows', authorId: 3 }
 ]
+
+// Object Types --------------------------------------------------------------------
 
 const BookType = new GraphQLObjectType({
   name: 'Book',
@@ -57,6 +61,8 @@ const AuthorType = new GraphQLObjectType({
     }
   })
 });
+
+// Queries -------------------------------------------------------------------------
 
 const RootQueryType = new GraphQLObjectType({
   name: 'Query',
@@ -90,6 +96,8 @@ const RootQueryType = new GraphQLObjectType({
     }
   })
 });
+
+// Mutations --------------------------------------------------------------------------
 
 const RootMutationType = new GraphQLObjectType({
   name: 'Mutation',
@@ -130,6 +138,7 @@ const RootMutationType = new GraphQLObjectType({
   })
 });
 
+// Schema ------------------------------------------------------------------------------
 
 const schema = new GraphQLSchema({
   query: RootQueryType,
@@ -140,4 +149,5 @@ app.use('/graphql', expressGraphQL({
   schema: schema,
   graphiql: true // Enables the graphql graphic interface
 }));
+
 app.listen(5000, () => console.log('Server Started Successfully'));
